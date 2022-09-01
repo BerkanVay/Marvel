@@ -22,5 +22,6 @@ extension HeroTableViewCell {
   func configure(withHero hero: Hero) {
     heroImageView.kf.setImage(with: hero.thumbnailURL)
     heroNameLabel.text = hero.name
+    
   }
 }
