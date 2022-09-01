@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loader.gif" translatesAutoresizingMaskIntoConstraints="NO" id="a34-Mb-nvR">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a34-Mb-nvR">
                         <rect key="frame" x="16" y="10" width="120" height="120"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -37,7 +37,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="90.401785714285708"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="loader.gif" width="128" height="128"/>
-    </resources>
 </document>
