@@ -14,7 +14,10 @@ class DetailViewController: UIViewController {
   @IBOutlet private weak var descriptionLabel: UILabel!
   @IBOutlet private weak var comicsLabel: UILabel!
   var hero : Hero?
-  var validComics = [ComicsItem]()
+  private var validComics = [ComicsItem]()
+  private let minimumComicReleaseYear = 2005
+  private let maksimumComicCount = 10
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setProperties()
@@ -46,14 +49,14 @@ extension DetailViewController {
     
     func extractComics() {
       for comic in hero.comics.items {
-        if let year = comic.year, year > 2005 {
+        if let year = comic.year, year > minimumComicReleaseYear {
           validComics.append(comic)
         }
       }
     }
     
     func sort(){
-      validComics.sort {  $0.year! > $1.year!}
+      validComics.sort { $0.year! > $1.year! }
     }
     
     func printComicsLabel(){
@@ -62,7 +65,7 @@ extension DetailViewController {
         comicsLabel.text = "This hero doesn't have any comic."
       }
       else {
-        let endIndex = validComics.count > 10 ? 9 : validComics.count - 1
+        let endIndex = validComics.count > maksimumComicCount ? 9 : validComics.count - 1
         for index in 0...endIndex{
           comicsLabel.text = comicsLabel.text! + "\(validComics[index].name)\n"
         }

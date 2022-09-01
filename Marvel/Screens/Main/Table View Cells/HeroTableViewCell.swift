@@ -9,13 +9,13 @@ import UIKit
 import Kingfisher
 
 class HeroTableViewCell: UITableViewCell {
+  static let identifier = "HeroTableViewCell"
+  @IBOutlet private weak var heroImageView: UIImageView!
+  @IBOutlet private weak var heroNameLabel: UILabel!
   
-  @IBOutlet weak var heroImageView: UIImageView!
-  @IBOutlet weak var heroNameLabel: UILabel!
-  
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
 }
 
 extension HeroTableViewCell {

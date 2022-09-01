@@ -8,9 +8,9 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
-  
-  private let APIKey = "9a0775362c118bd1580230b4f9beffc1"
-  private let privateAPIKey = "dd623b1efade5ce8701dc78c37ec77ee22cc7291"
+  private let apiKey = "9a0775362c118bd1580230b4f9beffc1"
+  private let privateApiKey = "dd623b1efade5ce8701dc78c37ec77ee22cc7291"
+  private let segueIdentifier = "showDetailViewController"
   private let ts = "1"
   private var heros = [Hero]()
   private var offset = 0
@@ -27,7 +27,7 @@ class MainTableViewController: UITableViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "showDetailViewController" {
+    if segue.identifier == segueIdentifier {
       if let destinationViewController = segue.destination as? DetailViewController, let selectedHero = selectedHero{
         destinationViewController.hero = selectedHero
       }
@@ -36,18 +36,18 @@ class MainTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     selectedHero = heros[indexPath.row]
-    performSegue(withIdentifier: "showDetailViewController", sender: self)
+    performSegue(withIdentifier: segueIdentifier , sender: self)
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "HeroTableViewCell", for: indexPath) as? HeroTableViewCell
     let hero = heros[indexPath.row]
     cell?.configure(withHero: hero)
-    return cell!
+    return cell ?? UITableViewCell()
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return CGFloat(140)
+    return 140
   }
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -60,12 +60,12 @@ class MainTableViewController: UITableViewController {
   private func registerTableViewCells() {
     let heroTableCell = UINib(nibName: "HeroTableViewCell",
                               bundle: nil)
-    self.tableView.register(heroTableCell,
-                            forCellReuseIdentifier: "HeroTableViewCell")
+    tableView.register(heroTableCell,
+                       forCellReuseIdentifier: "HeroTableViewCell")
   }
   
   private func fetchHeros(offset: Int) {
-    MarvelRESTClient.getCharacterResult(offset: offset, APIKey: APIKey, privateAPIKey: privateAPIKey, ts: ts) { [weak self] result in
+    MarvelRESTClient.getCharacterResult(offset: offset, apiKey: apiKey, privateApiKey: privateApiKey, ts: ts) { [weak self] result in
       guard let self = self else { return }
       
       switch result {
@@ -76,8 +76,6 @@ class MainTableViewController: UITableViewController {
         }
         
       case let .failure(error):
-        // TODO: Handle the error
-        
         print(error)
       }
     }

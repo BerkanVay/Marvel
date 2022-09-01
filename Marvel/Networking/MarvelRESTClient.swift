@@ -19,9 +19,9 @@ class MarvelRESTClient {
   
   private static let jsonDecoder = JSONDecoder()
   
-  static func getCharacterResult(offset: Int, APIKey: String, privateAPIKey: String, ts: String, completionHandler: @escaping (Result<CharactersResult, NetworkingError>) -> Void) {
-    let requestHash = MarvelRESTClient.MD5(string: "\(ts)\(privateAPIKey)\(APIKey)")
-    let requestURLString = "https://gateway.marvel.com/v1/public/characters?ts=\(ts)&apikey=\(APIKey)&hash=\(requestHash)&limit=20&offset=\(offset)"
+  static func getCharacterResult(offset: Int, apiKey: String, privateApiKey: String, ts: String, completionHandler: @escaping (Result<CharactersResult, NetworkingError>) -> Void) {
+    let requestHash = MarvelRESTClient.md5(string: "\(ts)\(privateApiKey)\(apiKey)")
+    let requestURLString = "https://gateway.marvel.com/v1/public/characters?ts=\(ts)&apikey=\(apiKey)&hash=\(requestHash)&limit=20&offset=\(offset)"
     MarvelRESTClient.doRequest(withURLString: requestURLString, completionHandler: completionHandler)
   }
   
@@ -59,7 +59,7 @@ class MarvelRESTClient {
     task.resume()
   }
   
-  private static func MD5(string: String) -> String {
+  private static func md5(string: String) -> String {
     let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
     
     return digest.map {
